@@ -1,0 +1,21 @@
+{
+  "name": "package",
+  "version": "1.0.0",
+  "description": "For learning",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1" ,
+    "pattern:diamond": "nodemon ./extra/patterns/diamond.js" ,
+    "pattern:triangle": "nodemon ./extra/patterns/triangle.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chiragSuccessive/express-server.git"
+  },
+  "author": "chirag",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chiragSuccessive/express-server/issues"
+  },
+  "homepage": "https://github.com/chiragSuccessive/express-server#readme"
+}
