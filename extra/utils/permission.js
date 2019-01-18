@@ -1,25 +1,29 @@
+const TRAINEE = 'trainee' ;
+const TRAINER = 'trainer';
+const HEAD-TRAINER = 'head-trainer';
+
 permissions = {
   getUsers: {
-    all: ["head-trainer"],
-    read: ["trainee", "trainer"],
-    write: ["trainer"],
-    delete: ["head-trainer"]
+    all: [],
+    read: [TRAINEE, TRAINER],
+    write: [TRAINER],
+    delete: [HEAD-TRAINER]
   },
   module1: {
-    all: ["trainer", "trainee"],
-    read: ["head-trainer", "trainer", "trainee"],
-    write: ["head-trainer"],
+    all: [TRAINER, TRAINEE],
+    read: [HEAD-TRAINER, TRAINER, TRAINEE],
+    write: [HEAD-TRAINER],
     delete: []
   },
   module2: {
-    all: ["trainee"],
-    read: ["head-trainer", "trainer", "trainee"],
-    write: ["trainer"],
-    delete: ["head-trainer"]
+    all: [TRAINEE],
+    read: [HEAD-TRAINER, TRAINER, TRAINEE],
+    write: [TRAINER],
+    delete: [HEAD-TRAINER]
   }
 };
 function hasPermission(moduleName, role, permissionType) {
-    if (permissions[moduleName] && permissions[moduleName][permissionType].includes(role)) {
+    if (permissions[moduleName] && permisssions[moduleName][permissionType] && permissions[moduleName][permissionType].includes(role)) {
       return true;
     } else {
       return false;
