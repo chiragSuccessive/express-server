@@ -1,11 +1,11 @@
-function patternTriangle(n)
+export default function triangle(n)
 {
     for(let i = 1 ;i<=n;i++)
     {
         let oneLinePattern = "";
         for(let space = n-i;space>=1;space--)
         {
-            oneLinePattern += " ";           
+            oneLinePattern += " ";
         }
         for(let row = 1 ;row<=i;row++)
         {
@@ -14,5 +14,3 @@ function patternTriangle(n)
         console.log(oneLinePattern);
     }
 }
-patternTriangle(4);
-patternTriangle(20)
