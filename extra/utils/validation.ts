@@ -1,10 +1,10 @@
 import { validateEmail } from './helpers'
-export default function validateUsers(users) {
+export default function validateUsers(users ) {
   let validusers = [],
     invalidusers = [],
     validcount = 0,
     invalidcount = 0;
-  users.forEach(function(user, index) {
+  users.forEach(function(user  , index ) :void {
     const { traineeEmail, reviewerEmail } = user;
     if (validateEmail(traineeEmail) && validateEmail(reviewerEmail)) {
       validusers.push(`user ${index + 1}`);

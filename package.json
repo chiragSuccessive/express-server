@@ -4,7 +4,9 @@
   "description": "For learning",
   "main": "index.js",
   "scripts": {
-    "dev": "babel-node extra --presets env"
+    "extra": "tsc-watch --project . --onSuccess \"npm run nodemon\"",
+    "dev": "babel-node extra --presets env",
+    "nodemon": "nodemon ./dist/index.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +22,9 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
-    "preset": "^1.0.0"
+    "preset": "^1.0.0",
+    "tsc": "^1.20150623.0",
+    "tsc-watch": "^1.0.31",
+    "typescript": "^3.2.4"
   }
 }

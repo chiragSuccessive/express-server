@@ -26,5 +26,5 @@ diamond(5);
 diamond(10);
 triangle(4);
 triangle(10);
-hasPermission("module1", "read", "trainee");
+hasPermission("module1", "read", "trainer");
 validate(users);
