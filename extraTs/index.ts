@@ -1,7 +1,7 @@
-import { IUsers } from './interfaces';
+import { IUsers } from "./interfaces";
 import { diamond, triangle } from "./patterns";
 import { hasPermission, validate } from "./utils";
-const users : IUsers[] = [
+const users: IUsers[] = [
   {
     // user 1
     traineeEmail: "chirag.arora@successive.tech",
@@ -27,5 +27,5 @@ diamond(5);
 diamond(10);
 triangle(4);
 triangle(10);
-hasPermission("module1", "read", "trainee");
+hasPermission("node", "trainee", "read");
 validate(users);

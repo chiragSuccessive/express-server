@@ -1,12 +1,10 @@
 import { permissions } from "../constants";
-export default function hasPermission(moduleName:string, role:string, permissionType:string) :boolean {
-  if (
-    permissions[moduleName] &&
-    permissions[moduleName][permissionType] &&
-    permissions[moduleName][permissionType].includes(role)
-  ) {
-    return true;
-  } else {
-    return false;
+export default function hasPermission(
+  moduleName: string,
+  role: string,
+  permissionType: string
+): void {
+  if (permissions[moduleName]["all" as string].includes(role)) {
+    console.log("true");
   }
 }
