@@ -1,20 +1,21 @@
-const TRAINEE = "trainee";
-const TRAINER = "trainer";
-const HEAD_TRAINER = "head-trainer";
-const permissions = {
-  getUsers: {
+import { IPermissions } from "./interfaces";
+const TRAINEE: string = "trainee";
+const TRAINER: string = "trainer";
+const HEAD_TRAINER: string = "head-trainer";
+const permissions: IPermissions = {
+  node: {
     all: [],
     read: [TRAINEE, TRAINER],
     write: [TRAINER],
     delete: [HEAD_TRAINER]
   },
-  module1: {
+  java: {
     all: [TRAINER, TRAINEE],
     read: [HEAD_TRAINER, TRAINER, TRAINEE],
     write: [HEAD_TRAINER],
     delete: []
   },
-  module2: {
+  python: {
     all: [TRAINEE],
     read: [HEAD_TRAINER, TRAINER, TRAINEE],
     write: [TRAINER],
