@@ -30,7 +30,7 @@ class Server {
       if (err) {
         throw err;
       }
-      console.log(`app listening on port ${port},`);
+      console.log(`app listening on port ${port}`);
     });
   }
 }
