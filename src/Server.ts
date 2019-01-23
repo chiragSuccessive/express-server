@@ -25,10 +25,7 @@ class Server {
     app.use(errorHandler);
   }
   public run() {
-    const {
-      app,
-      config: { port }
-    } = this;
+    const { app, config: { port } } = this;
     app.listen(port, err => {
       if (err) {
         throw err;
