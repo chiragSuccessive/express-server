@@ -18,7 +18,11 @@
     "url": "https://github.com/chiragSuccessive/express-server/issues"
   },
   "homepage": "https://github.com/chiragSuccessive/express-server#readme",
-  "dependencies": {},
+  "dependencies": {
+    "@types/express": "^4.16.0",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4"
+  },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
