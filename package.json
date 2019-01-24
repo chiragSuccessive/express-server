@@ -4,10 +4,11 @@
   "description": "For learning",
   "main": "index.js",
   "scripts": {
-    "prestart": "rm -rf ./dist",
+    "prestart": "npm run remove-dir",
     "start": "tsc-watch -p . --onSuccess \"npm run nodemon\"",
     "dev": "babel-node extra --presets env",
-    "nodemon": "nodemon ./dist/index.js"
+    "nodemon": "nodemon ./dist/index.js",
+    "remove-dir":"rm -rf ./dist"
   },
   "repository": {
     "type": "git",
