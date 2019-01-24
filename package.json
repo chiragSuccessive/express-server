@@ -4,7 +4,8 @@
   "description": "For learning",
   "main": "index.js",
   "scripts": {
-    "extra": "tsc-watch --project . --onSuccess \"npm run nodemon\"",
+    "prestart": "rm -rf ./dist",
+    "start": "tsc-watch -p . --onSuccess \"npm run nodemon\"",
     "dev": "babel-node extra --presets env",
     "nodemon": "nodemon ./dist/index.js"
   },
@@ -20,6 +21,7 @@
   "homepage": "https://github.com/chiragSuccessive/express-server#readme",
   "dependencies": {
     "@types/express": "^4.16.0",
+    "body-parser": "^1.18.3",
     "dotenv": "^6.2.0",
     "express": "^4.16.4"
   },
