@@ -13,7 +13,8 @@ const validate = {
     name: {
       required: true,
       in: ["body"],
-      errorMessage: "Name is required"
+      errorMessage: "Name is required",
+      re:/^([a-z0-9]{5,})$/
     }
   },
   delete: {
@@ -26,7 +27,7 @@ const validate = {
   get: {
     skip: {
       required: true,
-      default: 0,
+      default: 4,
       number: true,
       in: ["query"],
       errorMessage: "Skip is invalid"
@@ -49,7 +50,7 @@ const validate = {
       in: ["body"],
       required: true,
       isObject: true,
-      custom: function(dataToUpdate) {}
+      custom: function(dataToUpdate) {console.log("data updated",dataToUpdate);}
     }
   }
 };

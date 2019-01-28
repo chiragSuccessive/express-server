@@ -11,7 +11,7 @@ class Controller {
       }
     ];
 
-    res.send(successHandler("ok", 200, data));
+   res.send(successHandler("ok", 200,data));
   }
   public post(req: Request, res: Response, next: NextFunction) {
     const { name, id } = req.body;
@@ -52,11 +52,11 @@ class Controller {
     res.send(successHandler("successfully updated", 200, name));
   }
   public delete(req: Request, res: Response, next: NextFunction) {
-    const data = {
-      name: "chirag",
-      id: 564
-    };
-    const { name, id } = req.body;
+    // const data = {
+    //   name: "chirag",
+    //   id: 564
+    // };
+
     // if (id == data.id) {
     //   res.send(successHandler("successfully deleted", 200, id));
     // } else {
@@ -65,6 +65,7 @@ class Controller {
     //     status: 400,
     //     message: "id not present"
     //   });
+    // res.send(successHandler("successfully deleted", 200, id));
   }
   }
 const controller = new Controller();

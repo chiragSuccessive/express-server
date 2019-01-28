@@ -1,158 +1,97 @@
+import {successHandler} from "./index";
+
 const validationHandler = config => (req, res, next) => {
-  let arr = Object.keys(config);
-  console.log(arr);
-  for (let i = 0; i < arr.length; i++) {
-    const temp = arr[i];
-    // console.log(arr[i]);
-    // console.log(typeof arr[i]);
-    // console.log(config[arr[i]]);
+  let keys = Object.keys(config);
+  console.log(keys);
+  keys.forEach(key => {
+    const items = config[key];
+    const values = items.in.map(item => {
+      return req[item][key];
+    });
 
-    // console.log(config[arr[i]].required);
-    if (config[arr[i]].required) {
-      console.log(config[arr[i]].errorMessage);
+    if (items && items.required) {
+      values.forEach(value => {
+        console.log(items.default);
+        console.log(value == '')
+        if(value == '') { console.log(items.default)} ;
+      });
+      const validateValues = values.filter(temp => temp);
 
-      //---------------TO CHECK FOR BODY---------------//
-      if (config[arr[i]].in.includes("body")) {
-         console.log("in includes");
-        const { temp } = req.body;
-        console.log(temp);
-        if (!temp) {
-          return next({
-            error: "Bad Request",
-            message: config[arr[i]].errorMessage,
-            status: 400
-          });
-        }
-        // to check whether it is string or not.
-        if (config[arr[i]].string) {
-          if (typeof temp == "string") {
-            continue;
-          } else {
-            next({
-              error: "Bad Request",
-              message: "string required",
-              status: 400
-            });
-          }
-        }
-        // to check whether it is a number or not.
-        if (config[arr[i]].number) {
-          if (typeof temp == "number") {
-          } else {
-            next({
-              error: "Bad Request",
-              message: "number required",
-              status: 400
-            });
-          }
-        }
-        // to check whether it is a object or not.
-        if (config[arr[i]].isObject) {
-          if (typeof temp == "object") {
-          } else {
-            next({
-              error: "Bad Request",
-              message: "object required",
-              status: 400
-            });
-          }
-        }
-        // to pass the given default value if given
-      }
-
-      //---------------TO CHECK FOR PARAMS---------------//
-      if(config[arr[i]].in.includes == 'params') {
-        console.log("in includes");
-        const { temp } = req.params;
-        if (!temp) {
-          next({
-            error: "Bad Request",
-            message: config[arr[i]].errorMessage,
-            status: 400
-          });
-        }
-        // to check whether it is string or not.
-        if (config[arr[i]].string) {
-          if (typeof temp == "string") {
-            continue;
-          } else {
-            next({
-              error: "Bad Request",
-              message: "string required",
-              status: 400
-            });
-          }
-        }
-        // to check whether it is a number or not.
-        if (config[arr[i]].number) {
-          if (typeof temp == "number") {
-          } else {
-            next({
-              error: "Bad Request",
-              message: "number required",
-              status: 400
-            });
-          }
-        }
-        // to check whether it is a object or not.
-        if (config[arr[i]].isObject) {
-          if (typeof temp == "object") {
-          } else {
-            next({
-              error: "Bad Request",
-              message: "object required",
-              status: 400
-            });
-          }
-        }
-      }
-      //---------------TO CHECK FOR QUERY---------------//
-      if(config[arr[i]].in.includes == 'query') {
-        // console.log("in includes");
-        const { temp } = req.query;
-        if (!temp) {
-          next({
-            error: "Bad Request",
-            message: config[arr[i]].errorMessage,
-            status: 400
-          });
-        }
-        // to check whether it is string or not.
-        if (config[arr[i]].string) {
-          if (typeof temp == "string") {
-            continue;
-          } else {
-            next({
-              error: "Bad Request",
-              message: "string required",
-              status: 400
-            });
-          }
-        }
-        // to check whether it is a number or not.
-        if (config[arr[i]].number) {
-          if (typeof temp == "number") {
-          } else {
-            next({
-              error: "Bad Request",
-              message: "number required",
-              status: 400
-            });
-          }
-        }
-        // to check whether it is a object or not.
-        if (config[arr[i]].isObject) {
-          if (typeof temp == "object") {
-          } else {
-            next({
-              error: "Bad Request",
-              message: "object required",
-              status: 400
-            });
-          }
-        }
+      if (validateValues.length != values.length) {
+        return next({
+          error: "Bad Request",
+          message: `${key} required`,
+          status: 400
+        });
       }
     }
-  }
+    if (items && items.string) {
+      // const validateValues = values.filter(temp => temp);
+      console.log(typeof values);
+      values.forEach(value => {
+        console.log(typeof value);
+
+        if (typeof value != "string") {
+          return next({
+            error: "Bad Request",
+            message: `${key} should be string`,
+            status: 400
+          });
+        }
+      });
+    }
+    if (items && items.number) {
+      // const validateValues = values.filter(temp => temp);
+      console.log(typeof values);
+      values.forEach(value => {
+        console.log(typeof value);
+
+        if (typeof value != "number") {
+          return next({
+            error: "Bad Request",
+            message: `${key} should be number`,
+            status: 400
+          });
+        }
+      });
+    }
+    if (items && items.isObject) {
+      // const validateValues = values.filter(temp => temp);
+      console.log(typeof values);
+      values.forEach(value => {
+        console.log(typeof value);
+
+        if (typeof value != "object") {
+          return next({
+            error: "Bad Request",
+            message: `${key} should be object`,
+            status: 400
+          });
+        }
+      });
+    }
+    if (items && items.re) {
+      values.forEach(value => {
+        console.log("value", value);
+        const regrex = new RegExp(items.re);
+        console.log(regrex.test(value));
+        if (!regrex.test(value)) {
+          return next({
+            error: "Bad Request",
+            message: `${key} should be string`,
+            status: 400
+          });
+        }
+      });
+    }
+    if(items && items.custom) {
+      items.custom(4);
+    }
+    // if(items && items.default) {
+    //   console.log(items.default);
+    // }
+  });
+
+  next();
 };
 export default validationHandler;
