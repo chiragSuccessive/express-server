@@ -31,8 +31,6 @@ class Controller {
     // }
     // if (name && id) {
      res.send(successHandler("ok", 200, { name: name, id: id }));
-
-    next();
   }
   public put(req: Request, res: Response, next: NextFunction) {
     const data = {

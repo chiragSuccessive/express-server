@@ -26,7 +26,7 @@ const validate = {
   },
   get: {
     skip: {
-      required: true,
+      required: false,
       default: 4,
       number: true,
       in: ["query"],
