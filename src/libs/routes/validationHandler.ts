@@ -9,87 +9,49 @@ const validationHandler = config => (req, res, next) => {
 
     if (items && items.required) {
       const validateValues = values.filter(temp => temp);
-
       if (validateValues.length != values.length) {
-        return next({
-          error: "Bad Request",
-          message: `${key} required`,
-          status: 400
-        });
+        return next({error: "Bad Request",message: `${key} required`,status: 400 });
       }
-      if (items && items.string) {
-        // const validateValues = values.filter(temp => temp);
-        console.log(typeof values);
+      if (items.string) {
         values.forEach(value => {
-          console.log(typeof value);
-
           if (typeof value != "string") {
-            return next({
-              error: "Bad Request",
-              message: `${key} should be string`,
-              status: 400
-            });
+            return next({error: "Bad Request", message: `${key} should be string`, status: 400 });
           }
         });
       }
-      if (items && items.number) {
-        // const validateValues = values.filter(temp => temp);
-        console.log(typeof values);
+      if (items.number) {
         values.forEach(value => {
-          console.log(typeof value);
-
           if (typeof value != "number") {
-            return next({
-              error: "Bad Request",
-              message: `${key} should be number`,
-              status: 400
-            });
+            return next({ error: "Bad Request", message: `${key} should be number`, status: 400 });
           }
         });
       }
-      if (items && items.isObject) {
-        // const validateValues = values.filter(temp => temp);
-        console.log(typeof values);
+      if (items.isObject) {
         values.forEach(value => {
-          console.log(typeof value);
-
           if (typeof value != "object") {
-            return next({
-              error: "Bad Request",
-              message: `${key} should be object`,
-              status: 400
-            });
+            return next({ error: "Bad Request", message: `${key} should be object`, status: 400 });
           }
         });
       }
-      if (items && items.re) {
+      if (items.re) {
         values.forEach(value => {
-          // console.log("value", value);
           const regrex = new RegExp(items.re);
-          // console.log(regrex.test(value));
           if (!regrex.test(value)) {
-            return next({
-              error: "Bad Request",
-              message: `${key} should be string`,
-              status: 400
-            });
+            return next({ error: "Bad Request", message: `${key} should be string`, status: 400 });
           }
         });
       }
-      if (items && items.custom) {
+      if (items.custom) {
         items.custom(4);
       }
-    } else if (!items.required) {
+    }else {
       values.forEach(value => {
-        // console.log(items.default);
-        // console.log(value == "");
         if (value == "") {
           console.log(items.default);
         }
       });
     }
   });
-
   next();
 };
 export default validationHandler;
