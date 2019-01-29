@@ -1,4 +1,4 @@
-export default function successHandler( message: string, status: number,data:any) {
+export default function successHandler( message: string, status: number,data:any=null) {
   return ({
     message: message,
     status: status,

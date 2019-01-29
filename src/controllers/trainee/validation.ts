@@ -5,10 +5,6 @@ const validate = {
       string: true,
       in: ["body"],
       errorMessage:"id required",
-      // custom: function(value) {
-      //   console.log("Value", value);
-      //   throw { error: "Error Occured", message: "Message" };
-      // }
     },
     name: {
       required: true,
