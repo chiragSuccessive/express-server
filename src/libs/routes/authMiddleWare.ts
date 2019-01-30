@@ -1,8 +1,10 @@
 import * as jwt from 'jsonwebtoken';
+import configuration from "../../config/configuration";
 import hasPermission from "./permissions";
 export default (module, permissionType) => (req, res, next) => {
   const token = req.header('Authorization');
-  const userInfo = jwt.verify(token,process.env.KEY)
+  const {key} = configuration;
+  const userInfo = jwt.verify(token,key)
   // console.log(userInfo);
 
   if(!userInfo) {
