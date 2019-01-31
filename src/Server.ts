@@ -36,7 +36,7 @@ class Server {
           throw new Error(err);
         }
         console.log(`app listening on port ${port}`);
-        Database.disconnect();
+        // Database.disconnect();
       });
     }).catch(err => {
       console.log("error recieved in server",err);
