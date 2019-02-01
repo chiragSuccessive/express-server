@@ -3,7 +3,9 @@ class UserSchema extends mongoose.Schema{
   constructor(options) {
     const baseSchema = {
       id: String,
-      name: String
+      name: String,
+      email: String,
+      role: String
     }
     super(baseSchema,options);
   }

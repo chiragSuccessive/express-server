@@ -4,7 +4,7 @@ class Database {
   static open(url) {
       return mongoose.connect(url, { useNewUrlParser: true }).then(
         () => { console.log("successfully connected");
-         return seed();
+          return seed();
           //return "success";
         },
         err => {
