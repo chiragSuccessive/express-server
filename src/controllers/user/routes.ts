@@ -1,11 +1,11 @@
-import { Router } from "express";
-import controller from "./controller";
-import authMiddleWare from "../../libs/routes/authMiddleWare";
+import { Router } from 'express';
+import authMiddleWare from '../../libs/routes/authMiddleWare';
+import controller from './controller';
 const userRouter = Router();
-console.log("in userrouter");
+console.log('in userrouter');
 
-userRouter.post("/",authMiddleWare('node','read'),controller.create);
-userRouter.get("/",controller.get);
-userRouter.put("/",controller.put);
-userRouter.delete("/",controller.delete);
+userRouter.post('/', controller.create);
+userRouter.get('/', authMiddleWare( 'node', 'read' ), controller.get);
+userRouter.put('/', controller.put);
+userRouter.delete('/', controller.delete);
 export default userRouter;

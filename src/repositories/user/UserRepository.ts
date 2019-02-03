@@ -1,6 +1,6 @@
+import * as mongoose from 'mongoose';
+import IUserModel from './IUserModel';
 import { UserModel } from './UserModel';
-import * as mongoose from "mongoose";
-import IUserModel from "./IUserModel";
 class UserRepository {
   private model: mongoose.Model<IUserModel>;
   // public generateObjectId() {
@@ -12,24 +12,24 @@ class UserRepository {
   public count() {
     return this.model.countDocuments();
   }
-  public create(data):Promise<IUserModel> {
+  public create(data): Promise<IUserModel> {
     return this.model.create(data);
   }
   public read(data) {
     // console.log("in read");
-    return this.model.findOne(data);
+    return this.model.find(data);
   }
 
-  public update(data,name) {
-    return this.model.findOneAndUpdate(data,name).then( res => {
+  public update(data, name) {
+    return this.model.findOneAndUpdate(data, name).then( (res) => {
       console.log(res);
-    })
+    });
   }
   public delete(data) {
-    return this.model.findOneAndRemove(data).then( res => {
+    return this.model.findOneAndRemove(data).then( (res) => {
       console.log(res);
     });
   }
 }
 
-export default new UserRepository;
+export default new UserRepository();
