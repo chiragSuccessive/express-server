@@ -5,8 +5,8 @@ import user from '../../repositories/user/UserRepository';
 class Controller {
   public get(req: Request, res: Response) {
     console.log('in get controller');
-    user.read({}).then((users) => {
-      console.log(users);
+    user.read({id: req.body.id}).then((users) => {
+      console.log('info readed from users database', users);
       res.send(successHandler('ok', 200, users));
     });
   }

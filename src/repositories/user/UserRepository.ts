@@ -16,8 +16,8 @@ class UserRepository {
     return this.model.create(data);
   }
   public read(data) {
-    // console.log("in read");
-    return this.model.find(data);
+    console.log('in read');
+    return this.model.findOne(data);
   }
 
   public update(data, name) {

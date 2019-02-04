@@ -4,8 +4,13 @@ import controller from './controller';
 const userRouter = Router();
 console.log('in userrouter');
 
-userRouter.post('/', controller.create);
-userRouter.get('/', authMiddleWare( 'node', 'read' ), controller.get);
-userRouter.put('/', controller.put);
-userRouter.delete('/', controller.delete);
+try {
+  console.log('in userroutfgher');
+  userRouter.post('/', controller.create);
+  userRouter.get('/', authMiddleWare( 'read', 'node' ), controller.get);
+  userRouter.put('/', controller.put);
+  userRouter.delete('/', controller.delete);
+} catch (err) {
+  console.log(err);
+}
 export default userRouter;
