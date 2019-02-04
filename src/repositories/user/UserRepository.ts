@@ -1,7 +1,8 @@
 import * as mongoose from 'mongoose';
 import IUserModel from './IUserModel';
 import { UserModel } from './UserModel';
-class UserRepository {
+import versionableRepository from '../versionable/VersionableRepository';
+class UserRepository extends versionableRepository<IUserModel, mongoose.model<IUserModel>> {
   private model: mongoose.Model<IUserModel>;
   // public generateObjectId() {
   //   return String(mongoose.Types.ObjectId());
