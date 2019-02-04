@@ -1,7 +1,7 @@
-export default function successHandler( message: string, status: number,data:any=null) {
+export default function successHandler( message: string, status: number, data: any = 'data') {
   return ({
-    message: message,
-    status: status,
-    data:data
+    data,
+    message,
+    status,
   });
 }

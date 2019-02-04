@@ -1,18 +1,19 @@
-import * as mongoose from "mongoose";
+import * as mongoose from 'mongoose';
+import seed from './seedData';
 class Database {
-  static open(url) {
+  public static open(url) {
       return mongoose.connect(url, { useNewUrlParser: true }).then(
-        () => { console.log("successfully connected");
-          return "success";
+        () => { console.log('successfully connected');
+                return seed();
         },
-        err => {
-          console.log("error in database");
-    throw new Error(err);
-        }
+        (err) => {
+          console.log('error in database');
+          throw new Error(err);
+        },
       );
   }
-  static disconnect() {
-    console.log("Disconnected");
+  public static disconnect() {
+    console.log('Disconnected');
     mongoose.disconnect();
   }
 }

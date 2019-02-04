@@ -1,53 +1,53 @@
 const validate = {
-  post: {
-    id: {
-      required: true,
-      string: true,
-      in: ["body"],
-      errorMessage:"id required",
-    },
-    name: {
-      required: true,
-      in: ["body"],
-      errorMessage: "Name is required",
-      re:/^([a-z0-9]{5,})$/
-    }
-  },
   delete: {
     id: {
+      errorMessage: 'Id is required',
+      in: ['params'],
       required: true,
-      errorMessage: "Id is required",
-      in: ["params"]
-    }
+    },
   },
   get: {
-    skip: {
-      required: false,
-      default: 4,
-      number: true,
-      in: ["query"],
-      errorMessage: "Skip is invalid"
-    },
     limit: {
-      required: false,
       default: 10,
+      errorMessage: 'Limit is invalid',
+      in: ['query'],
       number: true,
-      in: ["query"],
-      errorMessage: "Limit is invalid"
-    }
+      required: false,
+    },
+    skip: {
+      default: 4,
+      errorMessage: 'Skip is invalid',
+      in: ['query'],
+      number: true,
+      required: false,
+    },
   },
-  update: {
+  post: {
     id: {
+      errorMessage: 'id required',
+      in: ['body'],
       required: true,
       string: true,
-      in: ["body"]
     },
-    dataToUpdate: {
-      in: ["body"],
+    name: {
+      errorMessage: 'Name is required',
+      in: ['body'],
+      re: /^([ a-z0-9 ])$/,
       required: true,
+    },
+  },
+  update: {
+    dataToUpdate: {
+      custom: ((dataToUpdate)  => {console.log('data updated', dataToUpdate); }),
+      in: ['body'],
       isObject: true,
-      custom: function(dataToUpdate) {console.log("data updated",dataToUpdate);}
-    }
-  }
+      required: true,
+    },
+    id: {
+      in: ['body'],
+      required: true,
+      string: true,
+    },
+  },
 };
 export default validate ;
