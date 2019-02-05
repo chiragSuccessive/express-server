@@ -11,10 +11,17 @@ class Controller {
     });
   }
   public create(req: Request, res: Response, next: NextFunction) {
-    res.send(successHandler('data is created', 200));
+    user.create(req.body).then((data) => {
+      res.send(successHandler('data is created', 200, data));
+    });
   }
   public put(req: Request, res: Response, next: NextFunction) {
-    res.send(successHandler('successfully updated', 200));
+    const { id, name } = req.body;
+    console.log('id', id);
+    console.log('name', name);
+    user.update(id, name).then((data) => {
+      res.send(successHandler('successfully updated', 200, data));
+    });
   }
   public delete(req: Request, res: Response, next: NextFunction) {
     res.send(successHandler('successfully deleted', 200));
