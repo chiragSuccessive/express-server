@@ -24,7 +24,10 @@ class Controller {
     });
   }
   public delete(req: Request, res: Response, next: NextFunction) {
-    res.send(successHandler('successfully deleted', 200));
+    const { id } = req.body;
+    user.delete(id).then((data) => {
+      res.send(successHandler('successfully deleted', 200, data));
+    });
   }
 }
 export default new Controller();

@@ -27,11 +27,11 @@ class UserRepository extends versionableRepository<IUserModel, mongoose.Model<IU
       console.log('in user update', res);
     });
   }
-  // public delete(data) {
-  //   return this.findOneAndRemove(data).then( (res) => {
-  //     console.log(res);
-  //   });
-  // }
+  public delete(data) {
+    return this.genericDelete(data).then( (res) => {
+      console.log(res);
+    });
+  }
 }
 
 export default new UserRepository();

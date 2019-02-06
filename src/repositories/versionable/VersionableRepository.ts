@@ -19,6 +19,11 @@ export default class VersionableRepository<
   public genericCreate(data) {
     console.log('in  generic create');
     const id = this.generateObjectId();
+    return this.model.create({...data, _id: id, originalId: id});
+  }
+  public genericUpdateCreate(data) {
+    console.log('in  generic create');
+    const id = this.generateObjectId();
     return this.model.create({...data, _id: id});
   }
   public genericRead(data) {
@@ -27,38 +32,19 @@ export default class VersionableRepository<
   }
   public genericUpdate(id, data): Promise<D> {
     console.log('in generic update');
-    return this.model.findOne({_id: id }).then((temp) => {
+    return this.model.findOne({ originalId: id }).lean().then((temp) => {
       console.log('res', temp);
-      if (!temp.updateAt) {
-        console.log('in update find', temp);
-        // delete res.name;
-        // delete temp._id;
-        console.log('response after delete', temp);
-
-        const dataToInsert = Object.assign(temp, {name: data, _id : this.generateObjectId()});
-        console.log('res-----', dataToInsert);
-        return this.genericCreate(dataToInsert).then((newres) => {
+      const dataToInsert = Object.assign(temp, {name: data, _id : this.generateObjectId()});
+      console.log('res-----', dataToInsert);
+      return this.genericUpdateCreate(dataToInsert).then((newres) => {
           console.log('in update create ', newres );
         });
-      }
-      else {
-        console.log('is update at');
-      }
-      this.model.updateOne(id, {$set : {deletedAt: true}}, {upsert: true} );
+    }).then((res) => {
+      console.log('------------432-----', res);
+      return this.model.updateOne( {_id: id}, {$set : {deletedAt: true}}, {upsert: true} );
     });
-    // return this.model.findOne({ id : `{id}` }).then( (res) => {
-    //   console.log('....................');
-    //   const { originalId } = res;
-    //   console.log('original id', originalId);
-    //   console.log('in generic update', res);
-
-    //   this.model.create( ...res);
-    //   return this.model.findOneAndUpdate(name);
-    // });
   }
-  // public genericDelete(data) {
-  //   return this.model.findOneAndRemove(data).then( (res) => {
-  //     console.log(res);
-  //   });
-  // }
+  public genericDelete(data) {
+    return this.model.findOneAndRemove(data);
+  }
 }
