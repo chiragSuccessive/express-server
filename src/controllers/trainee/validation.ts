@@ -23,17 +23,30 @@ const validate = {
     },
   },
   post: {
+    email: {
+      errorMessage: 'id required',
+      in: ['body'],
+      re: /^.+@.+\..+$/,
+      required: true,
+      string: true,
+    },
     id: {
       errorMessage: 'id required',
       in: ['body'],
-      required: true,
+      required: false,
       string: true,
     },
     name: {
       errorMessage: 'Name is required',
       in: ['body'],
       re: /^([ a-z0-9 ])$/,
+      required: false,
+    },
+    password: {
+      errorMessage: 'Name is required',
+      in: ['body'],
       required: true,
+      string: true,
     },
   },
   update: {

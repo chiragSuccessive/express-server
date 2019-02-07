@@ -6,6 +6,7 @@ class UserSchema extends VersionableSchema {
       email: String,
       id: String,
       name: String,
+      password: String,
       role: String,
     };
     super(options, baseSchema);

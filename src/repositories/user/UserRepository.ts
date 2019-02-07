@@ -14,23 +14,17 @@ class UserRepository extends versionableRepository<IUserModel, mongoose.Model<IU
     return this.genericCount();
   }
   public create(data) {
-    console.log('in user create');
     return this.genericCreate(data);
   }
   public read(data) {
-    console.log('in read');
     return this.genericRead(data);
   }
 
   public update(id, name) {
-    return this.genericUpdate(id, name).then( (res) => {
-      console.log('in user update', res);
-    });
+    return this.genericUpdate(id, name);
   }
   public delete(data) {
-    return this.genericDelete(data).then( (res) => {
-      console.log(res);
-    });
+    return this.genericDelete(data);
   }
 }
 

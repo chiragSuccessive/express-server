@@ -19,7 +19,6 @@ class Server {
     app.use(bodyparser.json());
   }
   public setupRoutes() {
-    console.log('INSIDE SETUP ROUTES:::::::');
     const { app } = this;
     app.use('/health-check', (req, res) => {
       res.send('i am ok');
@@ -30,11 +29,9 @@ class Server {
   }
   public run() {
     const { app, config: { port, mongo_url } } = this;
-    console.log('****************************************', port);
     Database.open(mongo_url).then( (res) => {
       app.listen(port, (err) => {
         if (err) {
-          console.log('error in run');
           throw new Error(err);
         }
         console.log(`app listening on port ${port}`);
