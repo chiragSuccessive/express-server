@@ -1,8 +1,8 @@
-import * as mongoose from 'mongoose';
+import { connect, disconnect } from 'mongoose';
 import seed from './seedData';
 class Database {
   public static open(url) {
-      return mongoose.connect(url, { useNewUrlParser: true }).then(
+      return connect(url, { useNewUrlParser: true }).then(
         () => { console.log('successfully connected');
                 return seed();
         },
@@ -13,8 +13,7 @@ class Database {
       );
   }
   public static disconnect() {
-    console.log('Disconnected');
-    mongoose.disconnect();
+    disconnect();
   }
 }
 export default Database;

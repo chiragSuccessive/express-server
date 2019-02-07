@@ -6,8 +6,8 @@ const permissions: IPermissions = {
   node: {
     all: [],
     delete: [HEAD_TRAINER],
-    read: [TRAINEE, TRAINER],
-    write: [TRAINER],
+    read: [TRAINEE, TRAINER, HEAD_TRAINER],
+    write: [TRAINER, HEAD_TRAINER],
   },
 };
 export default permissions;
