@@ -32,7 +32,6 @@ class Server {
     Database.open(mongo_url).then( (res) => {
       app.listen(port, (err) => {
         if (err) {
-          console.log('error in run');
           throw new Error(err);
         }
         console.log(`app listening on port ${port}`);

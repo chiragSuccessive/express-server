@@ -4,7 +4,7 @@ const TRAINER = 'trainer';
 const HEAD_TRAINER = 'head-trainer';
 const permissions: IPermissions = {
   node: {
-    all: [],
+    all: [HEAD_TRAINER],
     delete: [HEAD_TRAINER],
     read: [TRAINEE, TRAINER, HEAD_TRAINER],
     write: [TRAINER, HEAD_TRAINER],

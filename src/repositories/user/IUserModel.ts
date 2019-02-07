@@ -4,4 +4,5 @@ export default interface IUserModel extends IVersionableModel {
   name: string;
   email: string;
   role: string;
+  password: string;
 }

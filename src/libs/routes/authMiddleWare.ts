@@ -10,7 +10,7 @@ try {
   if (! userInfo) {
     return next({error: 'Unauthorized Access', message: 'User is not authorized', status: 403});
   }
-  user.read({_id: userInfo.id}).then((users) => {
+  user.read({ _id: userInfo.id}).then((users) => {
     if ( !users ) {
       return next({error: 'Unauthorized access', message: 'Permission denied', status: 400});
     }
@@ -18,7 +18,7 @@ try {
       return next({error: 'Unauthorized Access', message: `${permissionType} permission not allowed`, status: 403});
     }
     else {
-      req.body.id = users.id;
+      req.body.data = users._id;
       next();
     }
   });

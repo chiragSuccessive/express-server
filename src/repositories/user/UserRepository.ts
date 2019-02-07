@@ -17,7 +17,7 @@ class UserRepository extends versionableRepository<IUserModel, Model<IUserModel>
   }
 
   public update(id, name) {
-    return this.genericUpdate(id, name);
+  return this.genericUpdate(id, name);
   }
   public delete(data) {
     return this.genericDelete(data);  }

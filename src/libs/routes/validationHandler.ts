@@ -36,7 +36,7 @@ const validationHandler = (config) => (req, res, next) => {
         values.forEach((value) => {
           const regrex = new RegExp(items.re);
           if (!regrex.test(value)) {
-            return next({ error: 'Bad Request', message: `${key} should be string`, status: 400 });
+            return next({ error: 'Bad Request', message: `${key} should follow regrex`, status: 400 });
           }
         });
       }

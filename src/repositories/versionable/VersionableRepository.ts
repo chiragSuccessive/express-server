@@ -22,15 +22,16 @@ export default class VersionableRepository<D extends Document, M extends Model<D
   public genericRead(data) {
     return this.model.findOne(data);
   }
-  public genericUpdate(id, data): Promise<D> {
-    return this.model.findOne({ originalId: id }).lean().then((temp) => {
-      const dataToInsert = Object.assign(temp, {name: data, _id : this.generateObjectId()});
-      return this.genericUpdateCreate(dataToInsert).then((newres) => {
-          console.log('in update create ', newres );
-        });
-    }).then((res) => {
-      return this.model.updateOne( {_id: id}, {$set : {deletedAt: true}}, {upsert: true} );
-    });
+  public async genericUpdate(id, data): Promise<D> {
+      try {
+        const fetched = await this.model.findOne({ originalId: id, deletedAt: { $exists: false}}).lean();
+        const dataToInsert = Object.assign(fetched, {name: data, createdAt: new Date()});
+        await this.genericUpdateCreate(dataToInsert);
+        return this.model.updateOne({ _id: id }, {$set: { deletedAt: true }});
+      } catch (err) {
+        console.log(err);
+        throw new Error(err);
+      }
   }
   public genericDelete(data) {
     return this.model.findOneAndRemove(data);
