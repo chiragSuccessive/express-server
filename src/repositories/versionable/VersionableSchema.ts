@@ -1,5 +1,5 @@
-import * as mongoose from 'mongoose';
-export default class VersionableSchema extends mongoose.Schema {
+import { Schema } from 'mongoose';
+export default class VersionableSchema extends Schema {
   constructor(options, userSchema)  {
     const versionSchema = Object.assign({
       createdAt: {

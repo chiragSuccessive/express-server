@@ -4,9 +4,7 @@ import user from '../../repositories/user/UserRepository';
 
 class Controller {
   public get(req: Request, res: Response) {
-    console.log('in get controller');
-    user.read({id: req.body.id}).then((users) => {
-      console.log('info readed from users database', users);
+    user.read({_id: req.body.id}).then((users) => {
       res.send(successHandler('ok', 200, users));
     });
   }
@@ -17,8 +15,6 @@ class Controller {
   }
   public put(req: Request, res: Response, next: NextFunction) {
     const { id, name } = req.body;
-    console.log('id', id);
-    console.log('name', name);
     user.update(id, name).then((data) => {
       res.send(successHandler('successfully updated', 200, data));
     });

@@ -1,6 +1,5 @@
 const validationHandler = (config) => (req, res, next) => {
   const keys = Object.keys(config);
-  console.log(keys);
   keys.forEach((key) => {
     const items = config[key];
     const values = items.in.map((item) => {
