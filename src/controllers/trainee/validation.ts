@@ -27,7 +27,7 @@ const validate = {
       errorMessage: 'id required',
       in: ['body'],
       re: /^.+@.+\..+$/,
-      required: true,
+      required: false,
       string: true,
     },
     id: {
@@ -45,7 +45,7 @@ const validate = {
     password: {
       errorMessage: 'Name is required',
       in: ['body'],
-      required: true,
+      required: false,
       string: true,
     },
   },

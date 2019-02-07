@@ -1,12 +1,12 @@
-import * as mongoose from 'mongoose';
-export default class VersionableRepository<D extends mongoose.Document, M extends mongoose.Model<D>> {
+import { Document, Model, Types } from 'mongoose';
+export default class VersionableRepository<D extends Document, M extends Model<D>> {
   private model;
 
   constructor(model) {
     this.model = model;
   }
   public generateObjectId() {
-    return String(mongoose.Types.ObjectId());
+    return String(Types.ObjectId());
   }
   public genericCount() {
     return this.model.countDocuments();
@@ -20,18 +20,17 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
     return this.model.create({...data, _id: id});
   }
   public genericRead(data) {
-    console.log('in read');
     return this.model.findOne(data);
   }
   public async genericUpdate(id, data): Promise<D> {
       try {
-        const fetched = await this.model.findOne({ originalId: id }).lean();
+        const fetched = await this.model.findOne({ originalId: id, deletedAt: { $exists: false}}).lean();
         const dataToInsert = Object.assign(fetched, {name: data, createdAt: new Date()});
-        const newRes = await this.genericUpdateCreate(dataToInsert);
-        console.log('------------new file created', newRes);
-        return this.model.updateOne( {_id: fetched._id}, {$set : {deletedAt: true}}, {upsert: true} );
+        await this.genericUpdateCreate(dataToInsert);
+        return this.model.updateOne({ _id: id }, {$set: { deletedAt: true }});
       } catch (err) {
         console.log(err);
+        throw new Error(err);
       }
   }
   public genericDelete(data) {

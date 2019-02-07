@@ -1,4 +1,4 @@
-import * as bodyparser from 'body-parser';
+import { json, urlencoded } from 'body-parser';
 import * as express from 'express';
 import Database from './libs/Database';
 import { errorHandler, notFoundRoute } from './libs/routes';
@@ -15,8 +15,8 @@ class Server {
   }
   public initBodyParser() {
     const { app } = this;
-    app.use(bodyparser.urlencoded({ extended: false }));
-    app.use(bodyparser.json());
+    app.use( urlencoded({ extended: false }));
+    app.use( json());
   }
   public setupRoutes() {
     const { app } = this;
