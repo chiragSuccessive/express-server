@@ -6,7 +6,7 @@ import controller from './controller';
 const userRouter = Router();
 try {
   userRouter.post('/', validationHandler(validation.post), authMiddleWare( 'write', 'node' ), controller.create);
-  userRouter.get('/', authMiddleWare( 'read', 'node' ), controller.get);
+  userRouter.get('/', validationHandler(validation.get), authMiddleWare( 'read', 'node' ), controller.get);
   userRouter.put('/', validationHandler(validation.update), authMiddleWare( 'write', 'node' ), controller.put);
   userRouter.delete('/:id', validationHandler(validation.delete), authMiddleWare('delete', 'node'), controller.delete);
 } catch (err) {
