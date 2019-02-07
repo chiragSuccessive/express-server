@@ -4,8 +4,13 @@ import user from '../../repositories/user/UserRepository';
 
 class Controller {
   public async get(req: Request, res: Response) {
-    console.log('here--------');
-    const data = await user.read({ _id: req.body.data });
+    const { skip, limit } = req.query;
+    const count = await user.count();
+    const items = await user.find(skip, limit);
+    const data = {
+      items,
+      totalNoOfDocs : count,
+    };
     res.send(successHandler('data is created', 200, data));
   }
   public async create(req: Request, res: Response, next: NextFunction) {
