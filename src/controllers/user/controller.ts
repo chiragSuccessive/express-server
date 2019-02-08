@@ -23,7 +23,6 @@ class Controller {
     res.send(successHandler('successfully updated', 200, data));
   }
   public async delete(req: Request, res: Response, next: NextFunction) {
-    console.log(req.params);
     const { id } = req.params;
     const data = await user.delete(id);
     res.send(successHandler('successfully deleted', 200, data));
