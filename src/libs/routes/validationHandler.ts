@@ -46,7 +46,7 @@ const validationHandler = (config) => (req, res, next) => {
     } else {
       values.forEach((value) => {
         if (value === '') {
-          console.log(items.default);
+          console.log('in default');
         }
       });
     }
