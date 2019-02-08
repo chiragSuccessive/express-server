@@ -10,9 +10,9 @@ import validation from './trainee/validation';
 const tokenRouter = Router();
 
 try {
-  tokenRouter.post('/', validationHandler(validation.post), async (req, res, next) => {
+  tokenRouter.post('/', validationHandler(validation.postLogin), async (req, res, next) => {
     const { email, password} = req.body;
-    if (!user.read({email})) {
+    if (! await user.read({email})) {
       return next({error: 'Unauthorized access', message: 'Permission denied - email is wrong', status: 400});
     }
     const fetched = await user.read({email});
