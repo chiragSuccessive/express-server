@@ -7,8 +7,12 @@ class Controller {
     const { skip = 0, limit = 10 } = req.query;
     try {
       const count = await user.count();
-      const role = 'head-trainer';
-      const items = await user.find(role, skip, limit);
+      const obj = {
+        limit,
+        role: 'head-trainer',
+        skip,
+      };
+      const items = await user.find(obj);
       const data = {
         items,
         totalNoOfDocs : count,

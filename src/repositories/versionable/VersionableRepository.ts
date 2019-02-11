@@ -23,8 +23,9 @@ export default class VersionableRepository<D extends Document, M extends Model<D
   public genericRead(data): DocumentQuery<D, D, {}> {
     return this.model.findOne(data);
   }
-  public async genericFind(role, skip , limit): Promise<D[]> {
+  public async genericFind(data): Promise<D[]> {
     const count = await this.model.countDocuments();
+    const {role, skip, limit} = data;
     return await this.model.find(
       {
         deletedAt: {$exists: false},

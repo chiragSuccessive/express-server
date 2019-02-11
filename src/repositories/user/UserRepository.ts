@@ -15,8 +15,8 @@ class UserRepository extends versionableRepository<IUserModel, Model<IUserModel>
   public read(data) {
     return this.genericRead(data);
   }
-  public find(role, skip, limit) {
-    return this.genericFind(role, skip, limit);
+  public find(data) {
+    return this.genericFind(data);
   }
   public async update(id, name) {
   try {
