@@ -15,14 +15,31 @@ class UserRepository extends versionableRepository<IUserModel, Model<IUserModel>
   public read(data) {
     return this.genericRead(data);
   }
-  public find(skip, limit) {
-    return this.genericFind(skip , limit);
+  public find(data) {
+    return this.genericFind(data);
   }
-  public update(id, name) {
-  return this.genericUpdate(id, name);
+  public async update(id, name) {
+  try {
+    const updated = await this.genericUpdate(id, name);
+    if (updated) {
+      return updated;
+    }
+    throw new Error('Not updated');
+  } catch (err) {
+    throw new Error(err);
   }
-  public delete(data) {
-    return this.genericDelete(data);  }
-}
 
+  }
+  public async delete(id) {
+    try {
+      const deleted = await this.genericDelete(id);
+      if (deleted) {
+        return deleted;
+      }
+      throw new Error('Not deleted');
+    } catch (err) {
+      throw new Error(err.message);
+    }
+  }
+}
 export default new UserRepository();
